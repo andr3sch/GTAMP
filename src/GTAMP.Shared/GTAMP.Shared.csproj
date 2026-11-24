@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Biblioteca de protocolo compartilhada entre Servidor, Mod Cliente e Launcher.
+    - net452         -> consumida pelo Mod Cliente (ScriptHookVDotNet 2.x roda em .NET Framework 4.5.2)
+    - netstandard2.0 -> consumida pelo Servidor (.NET 8) e pelo Launcher
+    IMPORTANTE: mantenha este projeto em C# 7.3 (sem recursos que exijam runtime moderno).
+  -->
+  <PropertyGroup>
+    <TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
+    <LangVersion>7.3</LangVersion>
+    <RootNamespace>GTAMP.Shared</RootNamespace>
+    <AssemblyName>GTAMP.Shared</AssemblyName>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- 0.9.5.2 = ultima versao com alvo net35 (compativel com .NET 4.5.2 do SHVDN 2.x) -->
+    <PackageReference Include="LiteNetLib" Version="0.9.5.2" />
+  </ItemGroup>
+
+  <!-- Permite compilar net452 mesmo sem o "Developer Pack 4.5.2" instalado -->
+  <ItemGroup Condition="'$(TargetFramework)' == 'net452'">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+</Project>

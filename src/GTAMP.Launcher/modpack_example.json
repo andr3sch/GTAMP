@@ -1,0 +1,11 @@
+{
+  "Name": "GTAMP Roleplay Starter Pack",
+  "Version": "1.0",
+  "Files": [
+    {
+      "Path": "mods/update/x64/dlcpacks/exemplo_rp/dlc.rpf",
+      "Url": "https://seu-servidor.com/modpack/dlc.rpf",
+      "Sha256": ""
+    }
+  ]
+}

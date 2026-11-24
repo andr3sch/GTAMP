@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Mod Cliente para GTA V Build 1.0.463.1 / 1.0.505.2 via ScriptHookVDotNet v2.x (.NET Framework 4.5.2, x64).
+    Copie GTAMP.Client.dll, GTAMP.Shared.dll e LiteNetLib.dll para a pasta gta_data\scripts\.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <RootNamespace>GTAMP.Client</RootNamespace>
+    <AssemblyName>GTAMP.Client</AssemblyName>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GTAMP.Shared\GTAMP.Shared.csproj" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+    <PackageReference Include="NAudio" Version="1.10.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="ScriptHookVDotNet2" Condition="Exists('C:\Users\HOME\Downloads\GTA V LIGHTER V10 By OptiJuegos\GTA V LIGHTER V10 By OptiJuegos\gta_data\ScriptHookVDotNet2.dll')">
+      <HintPath>C:\Users\HOME\Downloads\GTA V LIGHTER V10 By OptiJuegos\GTA V LIGHTER V10 By OptiJuegos\gta_data\ScriptHookVDotNet2.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <PackageReference Include="ScriptHookVDotNet2" Version="2.*" ExcludeAssets="runtime" Condition="!Exists('C:\Users\HOME\Downloads\GTA V LIGHTER V10 By OptiJuegos\GTA V LIGHTER V10 By OptiJuegos\gta_data\ScriptHookVDotNet2.dll')" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,15 @@
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.log
+
+# Configuracoes locais / dados de runtime do servidor e launcher
+server_config.json
+rp_players.json
+rp_markers.json
+launcher_settings.json
+mp_config.ini
+modpacks_cache/
+gtamp_active_modpack.json
