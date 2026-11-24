@@ -99,6 +99,13 @@ dotnet build GTAMP.sln -c Release
 
 ---
 
+## Aviso Legal (Proyecto Sin Fines de Lucro)
+
+> **Proyecto 100% gratuito, de código abierto y SIN FINES DE LUCRO (no financiero).**
+> - GTAMP es una modificación hecha por fans únicamente con fines educativos y de entretenimiento comunitario, sin ningún tipo de monetización, venta o beneficio comercial.
+> - Este proyecto **no** está afiliado, respaldado ni asociado con **Rockstar Games**, **Take-Two Interactive** ni **OptiJuegos**.
+> - No se distribuye ningún archivo original del juego en este repositorio ni en las releases; el mod funciona exclusivamente en servidores privados/dedicados y **no** interactúa con el GTA Online oficial.
+
 ## Licencia
 
 Distribuido bajo licencia **MIT**. Consulta [LICENSE](LICENSE) para más detalles.
