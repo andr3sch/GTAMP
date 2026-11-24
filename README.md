@@ -78,6 +78,7 @@ Dentro da pasta onde roda o `GTAMP.Server.exe`, existe a pasta `resources/`:
    - Todos entram na mesma rede virtual; o host abre o `GTAMP.Server.exe` e passa o IP virtual (porta `4499`) para os amigos colocarem no `GTAMP.Launcher.exe`.
 2. **Port Forwarding / VPS**:
    - Libere **UDP `4499`** (jogo, chat e voz) e **TCP `4500`** (download de modpack e painel admin) no roteador/firewall.
+   - Veja o manual completo passo a passo (VPS Linux com `systemd`, VPS Windows e VPN) em **[docs/HOSTING.md](docs/HOSTING.md)**.
 
 ---
 
