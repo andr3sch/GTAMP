@@ -1,5 +1,7 @@
 # GTAMP — Multiplayer para GTA V Lighter (OptiJuegos)
 
+🌐 **Idiomas:** **🇧🇷 Português** | [🇪🇸 Español](README.es.md) | [🇺🇸 English](README.en.md)
+
 [![Release](https://img.shields.io/github/v/release/andr3sch/GTAMP?style=flat-square&color=2ea44f)](https://github.com/andr3sch/GTAMP/releases/latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
 [![GTA V](https://img.shields.io/badge/GTA%20V-1.0.463.1%20%2F%201.0.505.2-orange?style=flat-square)](#)
