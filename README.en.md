@@ -73,7 +73,7 @@ Inside the `GTAMP.Server.exe` directory, use the `resources/` folder:
 ## Connecting Remote Players
 
 1. **Radmin VPN / ZeroTier / Tailscale** *(easiest — no router config)*: join the same virtual network and connect using the host's virtual IP on port `4499`.
-2. **Port Forwarding / VPS**: forward **UDP `4499`** (game/chat/voice) and **TCP `4500`** (HTTP modpacks & admin panel). See the full step-by-step hosting guide (Linux VPS with `systemd`, Windows VPS & VPN) in **[docs/HOSTING.md](docs/HOSTING.md)**.
+2. **Port Forwarding / VPS**: forward **UDP `4499`** (game/chat/voice) and **TCP `4500`** (HTTP modpacks & admin panel). See the full step-by-step hosting guide (Linux VPS with `systemd`, Windows VPS & VPN) in **[docs/HOSTING.en.md](docs/HOSTING.en.md)**.
 
 ---
 

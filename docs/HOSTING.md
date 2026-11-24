@@ -1,5 +1,7 @@
 # Guia de Hospedagem — GTAMP Server (VPS Linux, Windows e VPN)
 
+🌐 **Idiomas:** **🇧🇷 Português** | [🇪🇸 Español](HOSTING.es.md) | [🇺🇸 English](HOSTING.en.md)
+
 Este guia mostra como hospedar um servidor dedicado **GTAMP** 24/7 em uma VPS Linux, VPS Windows ou no seu próprio PC.
 
 ---
