@@ -20,10 +20,10 @@ Multijugador dedicado en C# (.NET) diseñado específicamente para **GTA V Light
 
 Ve a la [**página de Releases**](https://github.com/andr3sch/GTAMP/releases/latest) y elige una opción:
 
-| Paquete | Ideal para | Cómo usar |
-| :--- | :--- | :--- |
-| **`GTAMP-Instalador.zip`** | Jugadores (1 clic) | Extrae y ejecuta **`Instalar_GTAMP.bat`**, selecciona tu carpeta `gta_data` ¡y listo! |
-| **`GTAMP-Portable.zip`** | Jugadores + Hosts de Servidor | Incluye carpetas listas: `1_Copiar_Para_gta_data`, `2_Launcher` y `3_Servidor`. |
+| Paquete | Ideal para | Cómo usar | VirusTotal |
+| :--- | :--- | :--- | :--- |
+| **`GTAMP-Instalador.zip`** | Jugadores (1 clic) | Extrae y ejecuta **`Instalar_GTAMP.bat`**, selecciona tu carpeta `gta_data` ¡y listo! | [✅ Ver Análisis](https://www.virustotal.com/gui/file/3ea54dd8a85cc589a09a11c7141eda88b89897522e6ff21a7cdfba891f745062) |
+| **`GTAMP-Portable.zip`** | Jugadores + Hosts de Servidor | Incluye carpetas listas: `1_Copiar_Para_gta_data`, `2_Launcher` y `3_Servidor`. | [✅ Ver Análisis](https://www.virustotal.com/gui/file/5ae94cf996311618a0bb0895beb46f86dc5844924c35a2d1a8936050778e687d) |
 
 > **Requisito previo para el Launcher y el Servidor:** instala [**Microsoft .NET 8 Desktop Runtime (x64)**](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) si aún no lo tienes en Windows.
 

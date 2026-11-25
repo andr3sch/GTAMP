@@ -20,10 +20,10 @@ Multiplayer dedicado em C# (.NET) feito sob medida para **GTA V Lighter (OptiJue
 
 Acesse a [**página de Releases**](https://github.com/andr3sch/GTAMP/releases/latest) e escolha uma opção:
 
-| Pacote | Ideal para | Como usar |
-| :--- | :--- | :--- |
-| **`GTAMP-Instalador.zip`** | Jogadores (1 clique) | Extraia e execute **`Instalar_GTAMP.bat`**, selecione sua pasta `gta_data` e pronto! |
-| **`GTAMP-Portable.zip`** | Jogadores + Donos de Servidor | Contém pastas prontas: `1_Copiar_Para_gta_data`, `2_Launcher` e `3_Servidor`. |
+| Pacote | Ideal para | Como usar | VirusTotal |
+| :--- | :--- | :--- | :--- |
+| **`GTAMP-Instalador.zip`** | Jogadores (1 clique) | Extraia e execute **`Instalar_GTAMP.bat`**, selecione sua pasta `gta_data` e pronto! | [✅ Verificar Scan](https://www.virustotal.com/gui/file/3ea54dd8a85cc589a09a11c7141eda88b89897522e6ff21a7cdfba891f745062) |
+| **`GTAMP-Portable.zip`** | Jogadores + Donos de Servidor | Contém pastas prontas: `1_Copiar_Para_gta_data`, `2_Launcher` e `3_Servidor`. | [✅ Verificar Scan](https://www.virustotal.com/gui/file/5ae94cf996311618a0bb0895beb46f86dc5844924c35a2d1a8936050778e687d) |
 
 > **Pré-requisito para o Launcher e Servidor:** instale o [**Microsoft .NET 8 Desktop Runtime (x64)**](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) caso ainda não tenha no Windows.
 

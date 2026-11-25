@@ -20,10 +20,10 @@ A dedicated C# (.NET) multiplayer mod built specifically for **GTA V Lighter (Op
 
 Visit the [**Releases page**](https://github.com/andr3sch/GTAMP/releases/latest) and choose a package:
 
-| Package | Best for | How to use |
-| :--- | :--- | :--- |
-| **`GTAMP-Instalador.zip`** | Players (1-click) | Extract and run **`Instalar_GTAMP.bat`**, pick your `gta_data` folder, and play! |
-| **`GTAMP-Portable.zip`** | Players + Server Hosts | Pre-organized folders: `1_Copiar_Para_gta_data`, `2_Launcher`, and `3_Servidor`. |
+| Package | Best for | How to use | VirusTotal |
+| :--- | :--- | :--- | :--- |
+| **`GTAMP-Instalador.zip`** | Players (1-click) | Extract and run **`Instalar_GTAMP.bat`**, pick your `gta_data` folder, and play! | [✅ View Scan](https://www.virustotal.com/gui/file/3ea54dd8a85cc589a09a11c7141eda88b89897522e6ff21a7cdfba891f745062) |
+| **`GTAMP-Portable.zip`** | Players + Server Hosts | Pre-organized folders: `1_Copiar_Para_gta_data`, `2_Launcher`, and `3_Servidor`. | [✅ View Scan](https://www.virustotal.com/gui/file/5ae94cf996311618a0bb0895beb46f86dc5844924c35a2d1a8936050778e687d) |
 
 > **Prerequisite for Launcher & Server:** install [**Microsoft .NET 8 Desktop Runtime (x64)**](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) if not already installed.
 
