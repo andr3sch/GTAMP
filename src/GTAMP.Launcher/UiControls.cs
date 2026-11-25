@@ -14,6 +14,8 @@ public sealed class RoundedButton : Control
     public Color NormalColor { get; set; } = Color.FromArgb(43, 142, 255);
     public Color HoverColor { get; set; } = Color.FromArgb(63, 158, 255);
     public Color PressedColor { get; set; } = Color.FromArgb(32, 118, 225);
+    public Color BorderColor { get; set; } = Color.Transparent;
+    public float BorderThickness { get; set; } = 1.2f;
     public ContentAlignment TextAlign { get; set; } = ContentAlignment.MiddleCenter;
 
     public RoundedButton()
@@ -49,10 +51,15 @@ public sealed class RoundedButton : Control
                    : _hovered ? HoverColor
                    : NormalColor;
 
-        var rect = new RectangleF(0.5f, 0.5f, Width - 1.5f, Height - 1.5f);
+        var rect = new RectangleF(0.8f, 0.8f, Width - 1.8f, Height - 1.8f);
         using var path = CreateRoundedPath(rect, CornerRadius);
         using var brush = new SolidBrush(fill);
         e.Graphics.FillPath(brush, path);
+        if (BorderColor.A > 0)
+        {
+            using var pen = new Pen(BorderColor, BorderThickness);
+            e.Graphics.DrawPath(pen, path);
+        }
 
         TextFormatFlags flags = TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis;
         if (TextAlign == ContentAlignment.MiddleLeft) flags |= TextFormatFlags.Left;
