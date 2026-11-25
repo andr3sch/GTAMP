@@ -10,6 +10,7 @@
     <Nullable>disable</Nullable>
     <RootNamespace>GTAMP.Launcher</RootNamespace>
     <AssemblyName>GTAMP.Launcher</AssemblyName>
+    <ApplicationIcon>..\..\docs\assets\gtamp.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>

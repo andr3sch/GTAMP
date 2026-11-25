@@ -42,6 +42,7 @@ public sealed class MainForm : Form
     private void BuildUi()
     {
         Text = "GTAMP Launcher — GTA V Build 1.0.463.1 / 1.0.505.2";
+        try { Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath); } catch { }
         Size = new Size(760, 560);
         MinimumSize = new Size(720, 520);
         StartPosition = FormStartPosition.CenterScreen;
