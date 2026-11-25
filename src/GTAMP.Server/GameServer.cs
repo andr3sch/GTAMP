@@ -27,7 +27,7 @@ namespace GTAMP.Server;
 public sealed class GameServer : IServerApi
 {
     private static readonly Regex NicknameRegex =
-        new(@"^[A-Za-z0-9_\-\.\[\]]+$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
+        new(@"^[\p{L}\p{N}_\-\.\[\] ]+$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
     private readonly ServerConfig _config;
     private readonly RpDatabase _rpDb;
@@ -223,10 +223,10 @@ public sealed class GameServer : IServerApi
             return;
         }
 
-        string nick = (data.Nickname ?? "").Trim();
+        string nick = Regex.Replace((data.Nickname ?? "").Trim(), @"\s+", " ");
         if (nick.Length < Protocol.MinNicknameLength || nick.Length > Protocol.MaxNicknameLength || !NicknameRegex.IsMatch(nick))
         {
-            Reject(request, $"Apelido invalido. Use {Protocol.MinNicknameLength}-{Protocol.MaxNicknameLength} caracteres: letras, numeros, _ - . [ ]");
+            Reject(request, $"Apelido invalido. Use {Protocol.MinNicknameLength}-{Protocol.MaxNicknameLength} caracteres (letras, numeros, espacos, _ - . [ ]).");
             return;
         }
 
@@ -672,11 +672,32 @@ public sealed class GameServer : IServerApi
         switch (cmd)
         {
             case "/help":
-                SendSystemChat(session, "Geral: /players /ping /ooc /me /do /g(ritar) /s(ussurrar) /menu");
+                SendSystemChat(session, "Geral: /players /ping /nick <novo> /ooc /me /do /g(ritar) /s(ussurrar) /menu");
                 SendSystemChat(session, "Voz/Emote: /radio <freq|0> /e <dancar|sentar|maos|acenar|fumar|parar>");
                 SendSystemChat(session, "RP: /emprego /pagar <id> <valor> /depositar <valor> /sacar <valor>");
                 SendSystemChat(session, "Freeroam/Admin: /carro <nome> /skin <nome> /arma <nome> /tp <x> <y> <z>");
                 break;
+
+            case "/nick":
+                {
+                    string newNick = Regex.Replace((arg ?? "").Trim(), @"\s+", " ");
+                    if (newNick.Length < Protocol.MinNicknameLength || newNick.Length > Protocol.MaxNicknameLength || !NicknameRegex.IsMatch(newNick))
+                    {
+                        SendSystemChat(session, $"Apelido invalido ({Protocol.MinNicknameLength}-{Protocol.MaxNicknameLength} caracteres).");
+                        break;
+                    }
+                    if (_sessions.Values.Any(s => s != session && string.Equals(s.Nickname, newNick, StringComparison.OrdinalIgnoreCase)))
+                    {
+                        SendSystemChat(session, "Este apelido ja esta em uso.");
+                        break;
+                    }
+                    string oldNick = session.Nickname;
+                    session.Nickname = newNick;
+                    BroadcastExcept(session, new PlayerJoinedPacket { PlayerId = session.Id, Nickname = newNick },
+                        Protocol.ChannelReliable, DeliveryMethod.ReliableOrdered);
+                    BroadcastSystemChat($"{oldNick} mudou o apelido para {newNick}.");
+                    break;
+                }
 
             case "/menu":
                 OpenMainInteractionMenu(session);

@@ -416,8 +416,14 @@ namespace GTAMP.Client
                         {
                             var p = new PlayerJoinedPacket();
                             p.Deserialize(reader);
-                            if (p.PlayerId != _localPlayerId && !_players.ContainsKey(p.PlayerId))
-                                _players[p.PlayerId] = new RemotePlayer(p.PlayerId, p.Nickname);
+                            if (p.PlayerId != _localPlayerId)
+                            {
+                                RemotePlayer existing;
+                                if (_players.TryGetValue(p.PlayerId, out existing))
+                                    existing.SetNickname(p.Nickname);
+                                else
+                                    _players[p.PlayerId] = new RemotePlayer(p.PlayerId, p.Nickname);
+                            }
                             break;
                         }
 

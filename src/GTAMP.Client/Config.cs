@@ -32,8 +32,19 @@ namespace GTAMP.Client
         public static string GetDefaultPath()
         {
             string dir = Path.GetDirectoryName(typeof(ClientConfig).Assembly.Location);
-            if (string.IsNullOrEmpty(dir)) dir = "scripts";
-            return Path.Combine(dir, "mp_config.ini");
+            if (!string.IsNullOrEmpty(dir))
+            {
+                string p = Path.Combine(dir, "mp_config.ini");
+                if (File.Exists(p)) return p;
+            }
+
+            string rel = Path.Combine("scripts", "mp_config.ini");
+            if (File.Exists(rel)) return rel;
+
+            string baseDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "scripts", "mp_config.ini");
+            if (File.Exists(baseDir)) return baseDir;
+
+            return rel;
         }
 
         public static ClientConfig LoadOrCreate(string path)

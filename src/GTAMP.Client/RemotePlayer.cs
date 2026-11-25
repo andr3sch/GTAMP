@@ -52,6 +52,18 @@ namespace GTAMP.Client
             LastUpdateMs = Environment.TickCount;
         }
 
+        public void SetNickname(string nickname)
+        {
+            if (string.IsNullOrWhiteSpace(nickname))
+                return;
+
+            Nickname = nickname.Trim();
+            if (Blip != null && Blip.Exists())
+            {
+                try { Blip.Name = Nickname; } catch { }
+            }
+        }
+
         public void ApplyState(PlayerStatePacket s)
         {
             _targetPos = Natives.ToGta(s.Position);

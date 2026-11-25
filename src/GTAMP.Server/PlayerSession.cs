@@ -16,7 +16,7 @@ public sealed class PlayerSession
 
     public NetPeer Peer { get; }
     public int Id => Peer.Id;
-    public string Nickname { get; }
+    public string Nickname { get; set; }
     public long AcceptedAt { get; }
 
     /// <summary>True apos PeerConnectedEvent (handshake UDP concluido).</summary>
