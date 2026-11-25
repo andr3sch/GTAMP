@@ -36,11 +36,10 @@ public sealed class MainForm : Form
 
     // Sidebar
     private readonly Panel _sidebar = new();
-    private readonly Button _navServers = new();
-    private readonly Button _navDirect = new();
-    private readonly Button _navSettings = new();
+    private readonly RoundedButton _navServers = new();
+    private readonly RoundedButton _navDirect = new();
+    private readonly RoundedButton _navSettings = new();
     private readonly Label _lblProfileNick = new();
-    private readonly Panel _navIndicator = new();
 
     // Paginas
     private readonly Panel _contentHost = new();
@@ -50,21 +49,21 @@ public sealed class MainForm : Form
 
     // Pagina 1: Servidores
     private readonly TextBox _txtSearch = new();
-    private readonly Button _btnRefresh = new();
-    private readonly Button _btnAddServer = new();
+    private readonly RoundedButton _btnRefresh = new();
+    private readonly RoundedButton _btnAddServer = new();
     private readonly Label _lblServerCount = new();
     private readonly ListView _lstServers = new();
     private readonly Label _lblSelTitle = new();
     private readonly Label _lblSelSub = new();
-    private readonly Button _btnPlaySelected = new();
+    private readonly RoundedButton _btnPlaySelected = new();
 
     // Pagina 2: Conexao Direta
     private readonly TextBox _txtIp = new();
     private readonly NumericUpDown _numPort = new();
     private readonly TextBox _txtPassword = new();
     private readonly TextBox _txtModpackUrl = new();
-    private readonly Button _btnSyncModpack = new();
-    private readonly Button _btnPlayDirect = new();
+    private readonly RoundedButton _btnSyncModpack = new();
+    private readonly RoundedButton _btnPlayDirect = new();
 
     // Pagina 3: Configuracoes
     private readonly TextBox _txtNick = new();
@@ -74,8 +73,8 @@ public sealed class MainForm : Form
     private readonly TextBox _txtListUrl = new();
     private readonly CheckBox _chkVad = new();
     private readonly CheckBox _chkAutoSync = new();
-    private readonly Button _btnSaveSettings = new();
-    private readonly Button _btnCreateShortcut = new();
+    private readonly RoundedButton _btnSaveSettings = new();
+    private readonly RoundedButton _btnCreateShortcut = new();
 
     // Barra inferior global
     private readonly ProgressBar _prgModpack = new();
@@ -175,31 +174,28 @@ public sealed class MainForm : Form
         };
         _sidebar.Controls.Add(lblTag);
 
-        // Indicador lateral do item ativo
-        _navIndicator.Size = new Size(4, 44);
-        _navIndicator.BackColor = AccentBlue;
-        _sidebar.Controls.Add(_navIndicator);
-
-        // Botoes de navegacao
-        ConfigureNavButton(_navServers, "  ▶   Servidores", 96, () => SwitchTab(0));
-        ConfigureNavButton(_navDirect, "  ⚡   Conexão Direta", 146, () => SwitchTab(1));
-        ConfigureNavButton(_navSettings, "  ⚙   Configurações", 196, () => SwitchTab(2));
+        // Botoes de navegacao arredondados estilo FiveM
+        ConfigureNavButton(_navServers, "▶   Servidores", 94, () => SwitchTab(0));
+        ConfigureNavButton(_navDirect, "⚡   Conexão Direta", 146, () => SwitchTab(1));
+        ConfigureNavButton(_navSettings, "⚙   Configurações", 198, () => SwitchTab(2));
 
         // Rodape da sidebar: Perfil + Links
         var pnlFooter = new Panel
         {
             Dock = DockStyle.Bottom,
-            Height = 132,
+            Height = 148,
             BackColor = BgSidebar,
             Padding = new Padding(14, 8, 14, 14)
         };
         _sidebar.Controls.Add(pnlFooter);
 
-        var profileCard = new Panel
+        var profileCard = new RoundedPanel
         {
             Location = new Point(14, 6),
-            Size = new Size(190, 56),
-            BackColor = BgCard,
+            Size = new Size(190, 58),
+            CornerRadius = 10,
+            FillColor = BgCard,
+            BorderColor = BorderSubtle,
             Cursor = Cursors.Hand
         };
         profileCard.Click += (_, _) => SwitchTab(2);
@@ -210,6 +206,7 @@ public sealed class MainForm : Form
             Text = "SEU APELIDO",
             Font = new Font("Segoe UI", 7.5f, FontStyle.Bold),
             ForeColor = TextMuted,
+            BackColor = BgCard,
             Location = new Point(12, 8),
             AutoSize = true
         };
@@ -218,38 +215,34 @@ public sealed class MainForm : Form
 
         _lblProfileNick.Font = new Font("Segoe UI", 10.5f, FontStyle.Bold);
         _lblProfileNick.ForeColor = Color.White;
-        _lblProfileNick.Location = new Point(12, 25);
+        _lblProfileNick.BackColor = BgCard;
+        _lblProfileNick.Location = new Point(12, 26);
         _lblProfileNick.Size = new Size(166, 22);
         _lblProfileNick.Click += (_, _) => SwitchTab(2);
         profileCard.Controls.Add(_lblProfileNick);
 
-        var btnDiscord = new Button { Text = "Discord Oficial" };
-        btnDiscord.SetBounds(14, 72, 190, 26);
+        var btnDiscord = new RoundedButton { Text = "Discord Oficial", CornerRadius = 9 };
+        btnDiscord.SetBounds(14, 74, 190, 30);
         StyleButton(btnDiscord, Color.FromArgb(88, 101, 242));
         btnDiscord.Font = new Font("Segoe UI", 8.5f, FontStyle.Bold);
         btnDiscord.Click += (_, _) => OpenUrl("https://discord.gg/XEqfhjmYUm");
         pnlFooter.Controls.Add(btnDiscord);
 
-        var btnGitHub = new Button { Text = "GitHub / Releases" };
-        btnGitHub.SetBounds(14, 102, 190, 24);
+        var btnGitHub = new RoundedButton { Text = "GitHub / Releases", CornerRadius = 9 };
+        btnGitHub.SetBounds(14, 110, 190, 28);
         StyleButton(btnGitHub, Color.FromArgb(35, 42, 56));
-        btnGitHub.Font = new Font("Segoe UI", 8f);
+        btnGitHub.Font = new Font("Segoe UI", 8.5f, FontStyle.Bold);
         btnGitHub.Click += (_, _) => OpenUrl("https://github.com/andr3sch/GTAMP");
         pnlFooter.Controls.Add(btnGitHub);
     }
 
-    private void ConfigureNavButton(Button btn, string text, int y, Action onClick)
+    private void ConfigureNavButton(RoundedButton btn, string text, int y, Action onClick)
     {
         btn.Text = text;
         btn.TextAlign = ContentAlignment.MiddleLeft;
-        btn.SetBounds(0, y, 219, 44);
-        btn.FlatStyle = FlatStyle.Flat;
-        btn.FlatAppearance.BorderSize = 0;
-        btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(26, 33, 47);
-        btn.BackColor = BgSidebar;
-        btn.ForeColor = TextMuted;
+        btn.CornerRadius = 10;
+        btn.SetBounds(12, y, 194, 42);
         btn.Font = new Font("Segoe UI", 10f, FontStyle.Bold);
-        btn.Cursor = Cursors.Hand;
         btn.Padding = new Padding(14, 0, 0, 0);
         btn.Click += (_, _) => onClick();
         _sidebar.Controls.Add(btn);
@@ -261,17 +254,12 @@ public sealed class MainForm : Form
         _pageDirect.Visible = index == 1;
         _pageSettings.Visible = index == 2;
 
-        Button[] navs = { _navServers, _navDirect, _navSettings };
+        RoundedButton[] navs = { _navServers, _navDirect, _navSettings };
         for (int i = 0; i < navs.Length; i++)
         {
             bool active = i == index;
-            navs[i].BackColor = active ? Color.FromArgb(24, 31, 45) : BgSidebar;
+            navs[i].SetPalette(active ? Color.FromArgb(35, 90, 175) : BgSidebar);
             navs[i].ForeColor = active ? Color.White : TextMuted;
-            if (active)
-            {
-                _navIndicator.Location = new Point(0, navs[i].Top);
-                _navIndicator.BringToFront();
-            }
         }
     }
 
@@ -346,38 +334,60 @@ public sealed class MainForm : Form
         _btnAddServer.Click += (_, _) => AddServerDialog();
         topBar.Controls.Add(_btnAddServer);
 
-        // Card inferior do servidor selecionado
-        var selectedCard = new Panel
+        // Card inferior do servidor selecionado (Dock limpo, nunca sobrepoe o botao!)
+        var selectedCard = new RoundedPanel
         {
             Dock = DockStyle.Bottom,
             Height = 86,
-            BackColor = BgCard,
-            Padding = new Padding(16, 12, 16, 12)
+            CornerRadius = 12,
+            FillColor = BgCard,
+            BorderColor = BorderSubtle,
+            Padding = new Padding(18, 14, 18, 14)
         };
         _pageServers.Controls.Add(selectedCard);
+
+        var rightActionPanel = new Panel
+        {
+            Dock = DockStyle.Right,
+            Width = 230,
+            BackColor = BgCard,
+            Padding = new Padding(12, 4, 0, 4)
+        };
+        selectedCard.Controls.Add(rightActionPanel);
+
+        _btnPlaySelected.Text = "▶  CONECTAR E JOGAR";
+        _btnPlaySelected.Dock = DockStyle.Fill;
+        _btnPlaySelected.CornerRadius = 12;
+        StyleButton(_btnPlaySelected, AccentGreen);
+        _btnPlaySelected.Font = new Font("Segoe UI", 10f, FontStyle.Bold);
+        _btnPlaySelected.Click += async (_, _) => await LaunchGameAsync(true);
+        rightActionPanel.Controls.Add(_btnPlaySelected);
+
+        var leftInfoPanel = new Panel
+        {
+            Dock = DockStyle.Fill,
+            BackColor = BgCard
+        };
+        selectedCard.Controls.Add(leftInfoPanel);
+        leftInfoPanel.BringToFront();
 
         _lblSelTitle.Text = "Selecione um servidor na lista";
         _lblSelTitle.Font = new Font("Segoe UI", 12f, FontStyle.Bold);
         _lblSelTitle.ForeColor = Color.White;
-        _lblSelTitle.Location = new Point(18, 16);
-        _lblSelTitle.Size = new Size(520, 26);
-        selectedCard.Controls.Add(_lblSelTitle);
+        _lblSelTitle.BackColor = BgCard;
+        _lblSelTitle.Dock = DockStyle.Top;
+        _lblSelTitle.Height = 28;
+        _lblSelTitle.AutoEllipsis = true;
+        leftInfoPanel.Controls.Add(_lblSelTitle);
 
         _lblSelSub.Text = "Clique duas vezes em um servidor ou use Conexão Direta para entrar.";
         _lblSelSub.Font = new Font("Segoe UI", 9f);
         _lblSelSub.ForeColor = TextMuted;
-        _lblSelSub.Location = new Point(18, 44);
-        _lblSelSub.Size = new Size(540, 22);
-        selectedCard.Controls.Add(_lblSelSub);
-
-        _btnPlaySelected.Text = "▶  CONECTAR E JOGAR";
-        _btnPlaySelected.Size = new Size(210, 46);
-        _btnPlaySelected.Anchor = AnchorStyles.Right | AnchorStyles.Top;
-        _btnPlaySelected.Location = new Point(selectedCard.Width - 228, 20);
-        StyleButton(_btnPlaySelected, AccentGreen);
-        _btnPlaySelected.Font = new Font("Segoe UI", 10f, FontStyle.Bold);
-        _btnPlaySelected.Click += async (_, _) => await LaunchGameAsync(true);
-        selectedCard.Controls.Add(_btnPlaySelected);
+        _lblSelSub.BackColor = BgCard;
+        _lblSelSub.Dock = DockStyle.Fill;
+        _lblSelSub.AutoEllipsis = true;
+        leftInfoPanel.Controls.Add(_lblSelSub);
+        _lblSelSub.BringToFront();
 
         // Lista de servidores OwnerDraw moderna
         var listHost = new Panel { Dock = DockStyle.Fill, Padding = new Padding(0, 8, 0, 12), BackColor = BgWindow };
@@ -481,11 +491,13 @@ public sealed class MainForm : Form
         };
         _pageDirect.Controls.Add(lblDesc);
 
-        var card = new Panel
+        var card = new RoundedPanel
         {
             Location = new Point(0, 74),
             Size = new Size(720, 290),
-            BackColor = BgCard,
+            CornerRadius = 14,
+            FillColor = BgCard,
+            BorderColor = BorderSubtle,
             Padding = new Padding(22)
         };
         _pageDirect.Controls.Add(card);
@@ -524,13 +536,14 @@ public sealed class MainForm : Form
 
         _btnPlayDirect.Text = "▶  CONECTAR E INICIAR GTA V";
         _btnPlayDirect.SetBounds(24, 194, 300, 48);
+        _btnPlayDirect.CornerRadius = 12;
         StyleButton(_btnPlayDirect, AccentGreen);
         _btnPlayDirect.Font = new Font("Segoe UI", 10.5f, FontStyle.Bold);
         _btnPlayDirect.Click += async (_, _) => await LaunchGameAsync(true);
         card.Controls.Add(_btnPlayDirect);
 
-        var btnSaveOnly = new Button { Text = "Apenas Salvar mp_config.ini" };
-        btnSaveOnly.SetBounds(340, 194, 220, 48);
+        var btnSaveOnly = new RoundedButton { Text = "Apenas Salvar mp_config.ini", CornerRadius = 12 };
+        btnSaveOnly.SetBounds(340, 194, 230, 48);
         StyleButton(btnSaveOnly, Color.FromArgb(42, 50, 68));
         btnSaveOnly.Click += async (_, _) => await LaunchGameAsync(false);
         card.Controls.Add(btnSaveOnly);
@@ -554,7 +567,7 @@ public sealed class MainForm : Form
         _pageSettings.Controls.Add(lblTitle);
 
         // Card 1: Perfil e Apelido
-        var cardProfile = new Panel { Location = new Point(0, 48), Size = new Size(740, 118), BackColor = BgCard };
+        var cardProfile = new RoundedPanel { Location = new Point(0, 48), Size = new Size(740, 118), CornerRadius = 14, FillColor = BgCard, BorderColor = BorderSubtle };
         _pageSettings.Controls.Add(cardProfile);
 
         AddFieldLabel(cardProfile, "SEU APELIDO NO JOGO (3 A 24 CARACTERES)", 20, 16);
@@ -566,6 +579,7 @@ public sealed class MainForm : Form
 
         _lblNickStatus.Location = new Point(356, 44);
         _lblNickStatus.Size = new Size(360, 24);
+        _lblNickStatus.BackColor = BgCard;
         _lblNickStatus.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
         cardProfile.Controls.Add(_lblNickStatus);
 
@@ -573,6 +587,7 @@ public sealed class MainForm : Form
         {
             Text = "Seu apelido aparece acima do personagem e no chat. Você também pode trocar no jogo com /nick <novo>.",
             ForeColor = TextMuted,
+            BackColor = BgCard,
             Font = new Font("Segoe UI", 8.5f),
             Location = new Point(20, 78),
             AutoSize = true
@@ -580,7 +595,7 @@ public sealed class MainForm : Form
         cardProfile.Controls.Add(lblNickTip);
 
         // Card 2: Pasta do GTA V Lighter
-        var cardGta = new Panel { Location = new Point(0, 180), Size = new Size(740, 118), BackColor = BgCard };
+        var cardGta = new RoundedPanel { Location = new Point(0, 180), Size = new Size(740, 118), CornerRadius = 14, FillColor = BgCard, BorderColor = BorderSubtle };
         _pageSettings.Controls.Add(cardGta);
 
         AddFieldLabel(cardGta, "PASTA DO GTA V LIGHTER (ONDE FICA O GTA5.EXE)", 20, 16);
@@ -589,19 +604,20 @@ public sealed class MainForm : Form
         _txtGtaDir.TextChanged += (_, _) => UpdateGtaStatusUi();
         cardGta.Controls.Add(_txtGtaDir);
 
-        var btnBrowse = new Button { Text = "Procurar..." };
-        btnBrowse.SetBounds(606, 37, 112, 31);
+        var btnBrowse = new RoundedButton { Text = "Procurar...", CornerRadius = 9 };
+        btnBrowse.SetBounds(606, 37, 112, 32);
         StyleButton(btnBrowse, Color.FromArgb(44, 52, 70));
         btnBrowse.Click += (_, _) => BrowseGtaFolder();
         cardGta.Controls.Add(btnBrowse);
 
         _lblGtaStatus.Location = new Point(20, 78);
         _lblGtaStatus.Size = new Size(700, 24);
+        _lblGtaStatus.BackColor = BgCard;
         _lblGtaStatus.Font = new Font("Segoe UI", 9f);
         cardGta.Controls.Add(_lblGtaStatus);
 
         // Card 3: Voz, Modpacks e Lista
-        var cardExtra = new Panel { Location = new Point(0, 312), Size = new Size(740, 146), BackColor = BgCard };
+        var cardExtra = new RoundedPanel { Location = new Point(0, 312), Size = new Size(740, 146), CornerRadius = 14, FillColor = BgCard, BorderColor = BorderSubtle };
         _pageSettings.Controls.Add(cardExtra);
 
         AddFieldLabel(cardExtra, "URL DE LISTA DE SERVIDORES JSON (OPCIONAL)", 20, 14);
@@ -612,12 +628,14 @@ public sealed class MainForm : Form
 
         _chkAutoSync.Text = "Sincronizar modpack do servidor automaticamente antes de abrir o GTA V";
         _chkAutoSync.ForeColor = TextPrimary;
+        _chkAutoSync.BackColor = BgCard;
         _chkAutoSync.AutoSize = true;
         _chkAutoSync.Location = new Point(20, 80);
         cardExtra.Controls.Add(_chkAutoSync);
 
         _chkVad.Text = "Usar Ativação por Voz (VAD) em vez de segurar N (Push-to-Talk)";
         _chkVad.ForeColor = TextPrimary;
+        _chkVad.BackColor = BgCard;
         _chkVad.AutoSize = true;
         _chkVad.Location = new Point(20, 108);
         cardExtra.Controls.Add(_chkVad);
@@ -653,6 +671,7 @@ public sealed class MainForm : Form
             Text = text,
             Font = new Font("Segoe UI", 8f, FontStyle.Bold),
             ForeColor = TextMuted,
+            BackColor = BgCard,
             Location = new Point(x, y),
             AutoSize = true
         });
@@ -664,6 +683,12 @@ public sealed class MainForm : Form
         tb.ForeColor = Color.White;
         tb.BorderStyle = BorderStyle.FixedSingle;
         tb.Font = new Font("Segoe UI", 10f);
+    }
+
+    private static void StyleButton(RoundedButton b, Color bg)
+    {
+        b.SetPalette(bg);
+        b.ForeColor = Color.White;
     }
 
     private static void StyleButton(Button b, Color bg)
